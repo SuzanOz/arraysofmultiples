@@ -8,9 +8,7 @@ public class UserDBRunner {
 		
 		HashMap<String, String> user = new HashMap<>();
 		System.out.println(user);
-		AddUser.addUser(user);
-		GetInfo.getInfo(user);
-		RemoveUser.removeUser(user);
-		
+		UserInfo.select("", user);
+
 	}
 }
