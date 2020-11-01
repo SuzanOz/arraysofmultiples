@@ -1,8 +1,10 @@
 package UserDBHashMap;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -44,13 +46,16 @@ public static void select(String option, HashMap<String, String> user) {
 	}
 	public static void addUser(HashMap<String, String> user) {
 	
+		String userInput;
 		String ssn = "";
+		String ssn2 = "";
 		do {
 			System.out.println("Enter SSN:");
 			ssn = scan.next();
+			 ssn2= ssn;
 			while(user.keySet().contains(ssn)) {
 	            System.out.println(ssn+ " exists. Enter a non-existing ssn");
-	            ssn= scan.next();
+	            ssn = scan.next();
 	            }
 			scan.nextLine();
 			System.out.println("Enter your full name:");
@@ -59,23 +64,28 @@ public static void select(String option, HashMap<String, String> user) {
 			String address = scan.nextLine();
 			System.out.println("Enter phone number");
 			String phone = scan.nextLine();
-			String userInput ="\nName: "+ name +"\nAddress: "+ address +"\nPhone: "+  phone; 
+			userInput ="\nName: "+ name +"\nAddress: "+ address +"\nPhone: "+  phone; 
 			user.put(ssn, userInput);
 			System.out.println("Press \'y' to enter more \nPress \'q' to exit ");
 		}while(!scan.next().equalsIgnoreCase("Q"));
 		System.out.println(user);
-		//write to file : "Users"
-	    try {
-	        File fileOne=new File("src/UserDBHashMap/Users");
-	        FileOutputStream fos=new FileOutputStream(fileOne);
-	        //ObjectOutputStream oos=new ObjectOutputStream(fos);
-
-//	        oos.writeObject(user);
-//	        oos.flush();
-//	        oos.close();
-	        fos.close();
-	    } catch(Exception e) {}
 		
+		//write to file : "Users"
+		PrintWriter writer = null;
+	    try {
+	        File userfile = new File("src/UserDBHashMap/Users");
+	        FileWriter fw = new FileWriter(userfile, true);
+
+	        writer = new PrintWriter(fw);
+	        writer.println(user); 
+	        
+	    }catch(FileNotFoundException e) {
+	    	
+	    }catch(IOException e) {
+	    	
+	    }
+		writer.close();
+		//userfile.close();
 	}
 	/*
 	 Create removeInfo() method
