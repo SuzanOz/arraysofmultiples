@@ -4,7 +4,7 @@ package Practice;
 	import java.util.List;
 	import java.util.ListIterator;
 
-	public class Q1 {
+	public class CollectionsPractice {
 	
 		public static void main(String[] args) {
 			List<String> list2 = new ArrayList<>();
